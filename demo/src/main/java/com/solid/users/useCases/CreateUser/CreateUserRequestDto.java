@@ -1,23 +1,14 @@
-package com.solid.entities;
+package com.solid.users.useCases.CreateUser;
 
-import java.util.UUID;
-
-public class User {
-
-    private final String id;
+public class CreateUserRequestDto {
     private String name;
     private String email;
     private String password;
 
-    public User(String id, String name, String email, String password) {
-        this.id = UUID.randomUUID().toString();
+    public CreateUserRequestDto(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {

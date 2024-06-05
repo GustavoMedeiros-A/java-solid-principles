@@ -1,11 +1,11 @@
-package com.solid.repositories.implementations;
+package com.solid.users.repositories.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.solid.entities.User;
-import com.solid.repositories.IUsersRepository;
+import com.solid.users.entities.User;
+import com.solid.users.repositories.IUsersRepository;
 
 public class InMemoryUsersRepository implements IUsersRepository {
     private List<User> users = new ArrayList<>();
@@ -22,5 +22,10 @@ public class InMemoryUsersRepository implements IUsersRepository {
     @Override
     public void save(User user) {
         users.add(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return new ArrayList<>(users);
     }
 }
