@@ -1,5 +1,7 @@
 package com.solid.users.useCases.createUser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.Optional;
@@ -36,5 +38,14 @@ public class CreateUserUseCaseTest {
         createUserUseCase.execute(request);
 
         verify(usersRepository, times(1)).save(any(User.class));
+    }
+
+    @Test
+    void shouldThrowErroWhenEmailExists() {
+        var request = new CreateUserRequestDto("Mario", "mario@mario.com", "123");
+        var existingUser = new User("Mario", "mario@mario.com", "123");
+        when(usersRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(existingUser));
+
+        assertThrows(IllegalStateException.class, () -> createUserUseCase.execute(request));
     }
 }
